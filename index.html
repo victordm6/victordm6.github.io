@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maria Eduarda ❤️ Victor</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #ffe6ec;
+      color: #333;
+      margin: 0;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #d63384;
+      font-size: 2em;
+    }
+    .contador {
+      font-size: 1.2em;
+      margin: 20px 0;
+    }
+    .fotos img {
+      width: 90%;
+      max-width: 300px;
+      margin: 10px auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .frase {
+      font-style: italic;
+      color: #444;
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+    audio {
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Maria Eduarda ❤️ Victor</h1>
+
+  <div class="contador">
+    Juntos há <span id="dias"></span> dias!
+  </div>
+
+  <audio controls autoplay loop>
+    <source src="SUA_MUSICA.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <div class="fotos">
+    <img src="foto1.jpg" alt="Foto do casal 1">
+    <img src="foto2.jpg" alt="Foto do casal 2">
+    <!-- Adicione mais fotos se quiser -->
+  </div>
+
+  <div class="frase">
+    "Com você, cada dia é o mais feliz da minha vida."
+  </div>
+
+  <script>
+    // Data de início do namoro: ano, mês (0-11), dia
+    const inicioNamoro = new Date(2022, 5, 12); // Exemplo: 12 de Junho de 2022
+    const hoje = new Date();
+    const diffTempo = hoje - inicioNamoro;
+    const dias = Math.floor(diffTempo / (1000 * 60 * 60 * 24));
+    document.getElementById('dias').textContent = dias;
+  </script>
+
+</body>
+</html>
