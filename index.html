@@ -36,9 +36,11 @@
     .carrossel {
       display: flex;
       overflow-x: auto;
-      gap: 15px;
-      padding: 10px 20px;
+      gap: 20px;
+      padding: 20px;
       scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      justify-content: center;
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
@@ -48,10 +50,18 @@
     }
 
     .carrossel img {
-      height: 300px;
-      border-radius: 20px;
+      height: 220px;
+      transition: transform 0.3s ease;
+      border-radius: 15px;
       scroll-snap-align: center;
       box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      opacity: 0.6;
+    }
+
+    .carrossel img.active {
+      transform: scale(1.2);
+      opacity: 1;
+      z-index: 1;
     }
 
     .frase {
@@ -97,11 +107,11 @@
 
   <div id="contador">Carregando tempo de amor...</div>
 
-  <div class="carrossel">
-    <img src="foto1.jpeg" alt="Foto do casal 1">
-    <img src="foto2.jpeg" alt="Foto do casal 2">
-    <img src="foto3.jpeg" alt="Foto do casal 3">
-    <!-- Adicione mais imagens se quiser -->
+  <div class="carrossel" id="carousel">
+    <img src="foto1.jpg" alt="Foto do casal 1">
+    <img src="foto2.jpg" alt="Foto do casal 2">
+    <img src="foto3.jpg" alt="Foto do casal 3">
+    <!-- Adicione mais imagens -->
   </div>
 
   <div class="frase">"Amar é colecionar momentos ao seu lado, todos os dias."</div>
@@ -114,8 +124,8 @@
   </audio>
 
   <script>
-    // Contador
-    const inicio = new Date(2024, 9, 18); // Outubro = mês 9 (zero indexado)
+    // CONTADOR
+    const inicio = new Date(2024, 9, 18); // Outubro = mês 9
     const contador = document.getElementById('contador');
 
     function atualizarTempo() {
@@ -143,7 +153,7 @@
 
     setInterval(atualizarTempo, 1000);
 
-    // Corações caindo
+    // CORAÇÕES CAINDO
     function criarCoracao() {
       const heart = document.createElement("div");
       heart.classList.add("heart");
@@ -151,12 +161,28 @@
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.animationDuration = 4 + Math.random() * 3 + "s";
       document.body.appendChild(heart);
-      setTimeout(() => {
-        heart.remove();
-      }, 7000);
+      setTimeout(() => heart.remove(), 7000);
     }
 
     setInterval(criarCoracao, 300);
+
+    // EFEITO CENTRAL DA IMAGEM
+    const carousel = document.getElementById("carousel");
+    const imgs = carousel.querySelectorAll("img");
+
+    function atualizarImagemCentral() {
+      let center = window.innerWidth / 2;
+      imgs.forEach(img => {
+        const box = img.getBoundingClientRect();
+        const imgCenter = box.left + box.width / 2;
+        const distancia = Math.abs(center - imgCenter);
+        img.classList.toggle("active", distancia < box.width / 2);
+      });
+    }
+
+    carousel.addEventListener("scroll", atualizarImagemCentral);
+    window.addEventListener("load", atualizarImagemCentral);
+    window.addEventListener("resize", atualizarImagemCentral);
   </script>
 
 </body>
