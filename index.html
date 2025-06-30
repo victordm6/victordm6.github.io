@@ -33,12 +33,25 @@
       line-height: 1.8em;
     }
 
-    .foto img {
-      width: 300px;
-      max-width: 90%;
+    .carrossel {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding: 10px 20px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .carrossel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carrossel img {
+      height: 300px;
       border-radius: 20px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-      z-index: 1;
+      scroll-snap-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     }
 
     .frase {
@@ -84,8 +97,11 @@
 
   <div id="contador">Carregando tempo de amor...</div>
 
-  <div class="foto">
-    <img src="foto1.jpg" alt="Foto do casal">
+  <div class="carrossel">
+    <img src="foto1.jpg" alt="Foto do casal 1">
+    <img src="foto2.jpg" alt="Foto do casal 2">
+    <img src="foto3.jpg" alt="Foto do casal 3">
+    <!-- Adicione mais imagens se quiser -->
   </div>
 
   <div class="frase">"Amar é colecionar momentos ao seu lado, todos os dias."</div>
@@ -99,7 +115,7 @@
 
   <script>
     // Contador
-    const inicio = new Date(2024, 9, 18); // Outubro é mês 9
+    const inicio = new Date(2024, 9, 18); // Outubro = mês 9 (zero indexado)
     const contador = document.getElementById('contador');
 
     function atualizarTempo() {
