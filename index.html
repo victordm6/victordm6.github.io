@@ -75,7 +75,7 @@
 
   <div class="frase">"Amar é colecionar momentos ao seu lado, todos os dias."</div>
 
-  <div class="data">Desde 01 de dezembro de 2010</div>
+  <div class="data">Desde 18 de outubro de 2024</div>
 
   <audio controls autoplay loop>
     <source src="musica.mp3" type="audio/mpeg">
@@ -83,7 +83,7 @@
   </audio>
 
   <script>
-    const inicio = new Date(2010, 11, 1); // Mês 11 = dezembro
+    const inicio = new Date(2024, 9, 18); // Outubro é mês 9 (0-indexado)
     const contador = document.getElementById('contador');
 
     function atualizarTempo() {
@@ -94,7 +94,6 @@
       let horas = agora.getHours() - inicio.getHours();
       let minutos = agora.getMinutes() - inicio.getMinutes();
       let segundos = agora.getSeconds() - inicio.getSeconds();
-      let ms = agora.getMilliseconds();
 
       if (segundos < 0) { segundos += 60; minutos--; }
       if (minutos < 0) { minutos += 60; horas--; }
@@ -107,11 +106,10 @@
       if (meses < 0) { meses += 12; anos--; }
 
       contador.innerHTML = `⏳<br>${anos} anos ${meses} meses ${dias} dias<br>
-        ${horas} horas ${minutos} minutos ${segundos} segundos<br>
-        ${ms} milissegundos`;
+        ${horas} horas ${minutos} minutos ${segundos} segundos`;
     }
 
-    setInterval(atualizarTempo, 50);
+    setInterval(atualizarTempo, 1000);
   </script>
 </body>
 </html>
