@@ -2,41 +2,61 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Maria Eduarda ❤️ Victor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background: #ffe6ec;
-      color: #333;
       margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #1e1e1e;
+      color: white;
       text-align: center;
-      padding: 20px;
+      overflow-x: hidden;
     }
+
     h1 {
-      color: #d63384;
-      font-size: 2em;
+      margin-top: 30px;
+      font-size: 1.8em;
+      color: #ff82a9;
     }
-    .contador {
-      font-size: 1.2em;
-      margin: 20px 0;
+
+    #contador {
+      margin-top: 20px;
+      font-size: 1.1em;
+      line-height: 1.8em;
     }
-    .fotos img {
-      width: 90%;
-      max-width: 300px;
-      margin: 10px auto;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+    .carrossel {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 20px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
     }
+
+    .carrossel img {
+      height: 300px;
+      border-radius: 20px;
+      scroll-snap-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
     .frase {
       font-style: italic;
-      color: #444;
-      margin-top: 20px;
       font-size: 1.2em;
+      margin: 30px 15px;
+      color: #e0e0e0;
     }
+
+    .data {
+      margin-bottom: 30px;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
     audio {
-      display: block;
-      margin: 20px auto;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -44,33 +64,54 @@
 
   <h1>Maria Eduarda ❤️ Victor</h1>
 
-  <div class="contador">
-    Juntos há <span id="dias"></span> dias!
+  <div id="contador">Carregando tempo de amor...</div>
+
+  <div class="carrossel">
+    <img src="foto1.jpg" alt="Foto do casal 1">
+    <img src="foto2.jpg" alt="Foto do casal 2">
+    <img src="foto3.jpg" alt="Foto do casal 3">
+    <!-- Adicione mais imagens conforme desejar -->
   </div>
 
+  <div class="frase">"Amar é colecionar momentos ao seu lado, todos os dias."</div>
+
+  <div class="data">Desde 01 de dezembro de 2010</div>
+
   <audio controls autoplay loop>
-    <source src="SUA_MUSICA.mp3" type="audio/mpeg">
+    <source src="musica.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio.
   </audio>
 
-  <div class="fotos">
-    <img src="foto1.jpg" alt="Foto do casal 1">
-    <img src="foto2.jpg" alt="Foto do casal 2">
-    <!-- Adicione mais fotos se quiser -->
-  </div>
-
-  <div class="frase">
-    "Com você, cada dia é o mais feliz da minha vida."
-  </div>
-
   <script>
-    // Data de início do namoro: ano, mês (0-11), dia
-    const inicioNamoro = new Date(2022, 5, 12); // Exemplo: 12 de Junho de 2022
-    const hoje = new Date();
-    const diffTempo = hoje - inicioNamoro;
-    const dias = Math.floor(diffTempo / (1000 * 60 * 60 * 24));
-    document.getElementById('dias').textContent = dias;
-  </script>
+    const inicio = new Date(2010, 11, 1); // Mês 11 = dezembro
+    const contador = document.getElementById('contador');
 
+    function atualizarTempo() {
+      const agora = new Date();
+      let anos = agora.getFullYear() - inicio.getFullYear();
+      let meses = agora.getMonth() - inicio.getMonth();
+      let dias = agora.getDate() - inicio.getDate();
+      let horas = agora.getHours() - inicio.getHours();
+      let minutos = agora.getMinutes() - inicio.getMinutes();
+      let segundos = agora.getSeconds() - inicio.getSeconds();
+      let ms = agora.getMilliseconds();
+
+      if (segundos < 0) { segundos += 60; minutos--; }
+      if (minutos < 0) { minutos += 60; horas--; }
+      if (horas < 0) { horas += 24; dias--; }
+      if (dias < 0) {
+        meses--;
+        const mesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0);
+        dias += mesAnterior.getDate();
+      }
+      if (meses < 0) { meses += 12; anos--; }
+
+      contador.innerHTML = `⏳<br>${anos} anos ${meses} meses ${dias} dias<br>
+        ${horas} horas ${minutos} minutos ${segundos} segundos<br>
+        ${ms} milissegundos`;
+    }
+
+    setInterval(atualizarTempo, 50);
+  </script>
 </body>
 </html>
