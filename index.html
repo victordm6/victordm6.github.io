@@ -5,58 +5,76 @@
   <title>Maria Eduarda ❤️ Victor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #1e1e1e;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0d0c1d;
       color: white;
+      font-family: 'Segoe UI', sans-serif;
       text-align: center;
-      overflow-x: hidden;
+      overflow: hidden;
+      position: relative;
     }
 
     h1 {
-      margin-top: 30px;
-      font-size: 1.8em;
+      margin: 30px 0 10px;
+      font-size: 2em;
       color: #ff82a9;
+      font-family: 'Brush Script MT', cursive;
     }
 
     #contador {
-      margin-top: 20px;
+      margin: 10px 0 30px;
       font-size: 1.1em;
       line-height: 1.8em;
     }
 
-    .carrossel {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      padding: 20px;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-    }
-
-    .carrossel img {
-      height: 300px;
+    .foto img {
+      width: 300px;
+      max-width: 90%;
       border-radius: 20px;
-      scroll-snap-align: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+      z-index: 1;
     }
 
     .frase {
-      font-style: italic;
+      margin-top: 30px;
       font-size: 1.2em;
-      margin: 30px 15px;
-      color: #e0e0e0;
+      color: #dcdcdc;
+      font-style: italic;
     }
 
     .data {
-      margin-bottom: 30px;
+      margin: 20px 0;
       font-size: 0.9em;
-      color: #ccc;
+      color: #bbb;
     }
 
     audio {
-      margin-top: 20px;
+      margin: 20px auto;
+      display: block;
+    }
+
+    /* Corações caindo */
+    .heart {
+      position: fixed;
+      top: -50px;
+      color: #ff69b4;
+      font-size: 20px;
+      animation: fall linear infinite;
+      opacity: 0.8;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -66,11 +84,8 @@
 
   <div id="contador">Carregando tempo de amor...</div>
 
-  <div class="carrossel">
-    <img src="foto1.jpg" alt="Foto do casal 1">
-    <img src="foto2.jpg" alt="Foto do casal 2">
-    <img src="foto3.jpg" alt="Foto do casal 3">
-    <!-- Adicione mais imagens conforme desejar -->
+  <div class="foto">
+    <img src="foto1.jpg" alt="Foto do casal">
   </div>
 
   <div class="frase">"Amar é colecionar momentos ao seu lado, todos os dias."</div>
@@ -83,7 +98,8 @@
   </audio>
 
   <script>
-    const inicio = new Date(2024, 9, 18); // Outubro é mês 9 (0-indexado)
+    // Contador
+    const inicio = new Date(2024, 9, 18); // Outubro é mês 9
     const contador = document.getElementById('contador');
 
     function atualizarTempo() {
@@ -110,6 +126,22 @@
     }
 
     setInterval(atualizarTempo, 1000);
+
+    // Corações caindo
+    function criarCoracao() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💜";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }
+
+    setInterval(criarCoracao, 300);
   </script>
+
 </body>
 </html>
