@@ -51,7 +51,7 @@
 
     .carrossel img {
       height: 220px;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       border-radius: 15px;
       scroll-snap-align: center;
       box-shadow: 0 5px 15px rgba(0,0,0,0.5);
@@ -62,6 +62,7 @@
       transform: scale(1.2);
       opacity: 1;
       z-index: 1;
+      box-shadow: 0 0 20px #ff82a9, 0 0 40px #ff82a9;
     }
 
     .frase {
@@ -69,6 +70,18 @@
       font-size: 1.2em;
       color: #dcdcdc;
       font-style: italic;
+    }
+
+    .mensagem {
+      margin-top: 20px;
+      font-size: 1.3em;
+      color: #ffb6c1;
+      animation: fadeIn 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
     }
 
     .data {
@@ -108,39 +121,23 @@
   <div id="contador">Carregando tempo de amor...</div>
 
   <div class="carrossel" id="carousel">
-    <img src="foto1.jpeg" alt="Foto do casal 1">
-    <img src="foto2.jpeg" alt="Foto do casal 2">
-    <img src="foto3.jpeg" alt="Foto do casal 3">
+    <img src="foto1.jpg" alt="Foto do casal 1">
+    <img src="foto2.jpg" alt="Foto do casal 2">
+    <img src="foto3.jpg" alt="Foto do casal 3">
     <!-- Adicione mais imagens -->
   </div>
 
   <div class="frase">"Amar é colecionar momentos ao seu lado, todos os dias."</div>
 
+  <div class="mensagem">Você é o meu para sempre! 💕</div>
+
   <div class="data">Desde 18 de outubro de 2024</div>
 
-<audio id="musica" preload="auto" loop hidden>
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
+  <audio controls autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
 
-<script>
-  const audio = document.getElementById('musica');
-
-  async function tentarTocar() {
-    try {
-      await audio.play(); // tenta tocar com som
-    } catch (e) {
-      // falha silenciosa (o navegador vai tentar de novo no próximo evento)
-    }
-  }
-
-  // Tenta tocar quando a página carrega
-  document.addEventListener('DOMContentLoaded', tentarTocar);
-
-  // Tenta tocar ao primeiro clique, toque, rolagem ou tecla
-  ['click','touchstart','scroll','keydown'].forEach(evt => {
-    document.addEventListener(evt, tentarTocar, { once: true });
-  });
-</script>
   <script>
     // CONTADOR
     const inicio = new Date(2024, 9, 18); // Outubro = mês 9
@@ -169,14 +166,16 @@
         ${horas} horas ${minutos} minutos ${segundos} segundos`;
     }
 
+    atualizarTempo();
     setInterval(atualizarTempo, 1000);
 
     // CORAÇÕES CAINDO
     function criarCoracao() {
       const heart = document.createElement("div");
       heart.classList.add("heart");
-      heart.innerHTML = "💜";
+      heart.innerHTML = ["💜", "❤️", "💖", "💘"][Math.floor(Math.random()*4)];
       heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (15 + Math.random() * 15) + "px";
       heart.style.animationDuration = 4 + Math.random() * 3 + "s";
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 7000);
@@ -201,6 +200,15 @@
     carousel.addEventListener("scroll", atualizarImagemCentral);
     window.addEventListener("load", atualizarImagemCentral);
     window.addEventListener("resize", atualizarImagemCentral);
+
+    // CARROSSEL AUTOMÁTICO
+    let scrollStep = 1;
+    setInterval(() => {
+      carousel.scrollLeft += scrollStep;
+      if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth || carousel.scrollLeft === 0) {
+        scrollStep *= -1;
+      }
+    }, 30);
   </script>
 
 </body>
