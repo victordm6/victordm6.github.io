@@ -118,78 +118,29 @@
 
   <div class="data">Desde 18 de outubro de 2024</div>
 
-  <audio id="musica" preload="auto" loop hidden>
+<audio id="musica" preload="auto" loop hidden>
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
-
-<style>
-  #play-audio-btn{
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,.6);
-    color: #fff;
-    font-size: 1.1rem;
-    z-index: 9999;
-    backdrop-filter: blur(2px);
-  }
-  #play-audio-btn button{
-    background: #ff82a9;
-    border: 0;
-    border-radius: 999px;
-    padding: 12px 22px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-</style>
 
 <script>
   const audio = document.getElementById('musica');
 
-  async function tryPlay() {
+  async function tentarTocar() {
     try {
-      await audio.play();                 // tenta autoplay com som
-      hideOverlay();                      // se deu certo, some com o overlay
+      await audio.play(); // tenta tocar com som
     } catch (e) {
-      showOverlay();                      // se falhar, pede 1 toque
+      // falha silenciosa (o navegador vai tentar de novo no próximo evento)
     }
   }
 
-  function showOverlay() {
-    if (document.getElementById('play-audio-btn')) return;
-    const overlay = document.createElement('div');
-    overlay.id = 'play-audio-btn';
-    overlay.innerHTML = `<button>▶️ Tocar nossa música</button>`;
-    document.body.appendChild(overlay);
+  // Tenta tocar quando a página carrega
+  document.addEventListener('DOMContentLoaded', tentarTocar);
 
-    const play = async () => {
-      try {
-        await audio.play();
-        hideOverlay();
-      } catch (e) {
-        // se ainda falhar, mantém o overlay
-      }
-    };
-
-    overlay.addEventListener('click', play, { once: true });
-    overlay.addEventListener('touchstart', play, { once: true });
-  }
-
-  function hideOverlay() {
-    const o = document.getElementById('play-audio-btn');
-    if (o) o.remove();
-  }
-
-  // 1) tenta tocar assim que carregar
-  document.addEventListener('DOMContentLoaded', tryPlay);
-
-  // 2) fallback: se o usuário rolar/tocar, tenta de novo
+  // Tenta tocar ao primeiro clique, toque, rolagem ou tecla
   ['click','touchstart','scroll','keydown'].forEach(evt => {
-    document.addEventListener(evt, tryPlay, { once: true });
+    document.addEventListener(evt, tentarTocar, { once: true });
   });
-  </script>
+</script>
   <script>
     // CONTADOR
     const inicio = new Date(2024, 9, 18); // Outubro = mês 9
