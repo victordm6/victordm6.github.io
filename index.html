@@ -12,7 +12,9 @@
     }
 
     body {
-      background: #0d0c1d;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
       color: white;
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
@@ -20,10 +22,17 @@
       position: relative;
     }
 
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     h1 {
       margin: 30px 0 10px;
       font-size: 2em;
-      color: #ff82a9;
+      color: #fff0f5;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
       font-family: 'Brush Script MT', cursive;
     }
 
@@ -31,6 +40,7 @@
       margin: 10px 0 30px;
       font-size: 1.1em;
       line-height: 1.8em;
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     }
 
     .carrossel {
@@ -68,14 +78,15 @@
     .frase {
       margin-top: 30px;
       font-size: 1.2em;
-      color: #dcdcdc;
+      color: #fff;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
       font-style: italic;
     }
 
     .mensagem {
       margin-top: 20px;
       font-size: 1.3em;
-      color: #ffb6c1;
+      color: #ffe4e1;
       animation: fadeIn 2s ease-in-out infinite alternate;
     }
 
@@ -87,7 +98,8 @@
     .data {
       margin: 20px 0;
       font-size: 0.9em;
-      color: #bbb;
+      color: #f0f0f0;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
     }
 
     audio {
@@ -121,9 +133,9 @@
   <div id="contador">Carregando tempo de amor...</div>
 
   <div class="carrossel" id="carousel">
-    <img src="foto1.jpeg" alt="Foto do casal 1">
-    <img src="foto2.jpeg" alt="Foto do casal 2">
-    <img src="foto3.jpeg" alt="Foto do casal 3">
+    <img src="foto1.jpg" alt="Foto do casal 1">
+    <img src="foto2.jpg" alt="Foto do casal 2">
+    <img src="foto3.jpg" alt="Foto do casal 3">
     <!-- Adicione mais imagens -->
   </div>
 
