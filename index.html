@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Maria Eduarda ❤️ Victor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -24,7 +25,7 @@
       margin: 30px 0 10px;
       font-size: 2em;
       color: #ff82a9;
-      font-family: 'Brush Script MT', cursive;
+      font-family: 'Dancing Script', cursive;
     }
 
     #contador {
@@ -33,6 +34,19 @@
       line-height: 1.8em;
     }
 
+    /* Música */
+    .musica {
+      margin: 20px auto;
+      max-width: 320px;
+    }
+
+    .musica p {
+      margin-bottom: 5px;
+      font-size: 0.95em;
+      color: #ccc;
+    }
+
+    /* Carrossel */
     .carrossel {
       display: flex;
       overflow-x: auto;
@@ -40,9 +54,13 @@
       padding: 20px;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
-      justify-content: center;
+      justify-content: flex-start;
       scrollbar-width: none;
       -ms-overflow-style: none;
+      width: 100%;
+      touch-action: pan-x;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
     }
 
     .carrossel::-webkit-scrollbar {
@@ -50,12 +68,14 @@
     }
 
     .carrossel img {
+      min-width: 250px;
       height: 220px;
       transition: transform 0.3s ease;
       border-radius: 15px;
       scroll-snap-align: center;
       box-shadow: 0 5px 15px rgba(0,0,0,0.5);
       opacity: 0.6;
+      flex-shrink: 0;
     }
 
     .carrossel img.active {
@@ -77,7 +97,6 @@
       color: #bbb;
     }
 
-    /* Corações caindo */
     .heart {
       position: fixed;
       top: -50px;
@@ -94,21 +113,29 @@
         opacity: 0;
       }
     }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      font-size: 0.8em;
+      color: #666;
+    }
   </style>
 </head>
 <body>
 
   <h1>Maria Eduarda ❤️ Victor</h1>
 
-<!-- Música Spotify: Poema de Amor - Bom Gosto -->
-<div style="margin: 20px auto; max-width: 320px;">
-  <iframe style="border-radius:12px"
-  src="https://open.spotify.com/embed/track/19fQ0Zvr2gOx2ouehx8hkX?si=67d384285a204989?utm_source=generator&theme=0"
-  width="100%" height="80" frameborder="0" allowfullscreen=""
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  loading="lazy">
-  </iframe>
-</div>
+  <div class="musica">
+    <p>🎵 Nossa música especial:</p>
+    <iframe style="border-radius:12px"
+      src="https://open.spotify.com/embed/track/19fQ0Zvr2gOx2ouehx8hkX?si=67d384285a204989&utm_source=generator&theme=0"
+      width="100%" height="80" frameborder="0" allowfullscreen=""
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
+    </iframe>
+  </div>
 
   <div id="contador">Carregando tempo de amor...</div>
 
@@ -116,16 +143,19 @@
     <img src="foto1.jpeg" alt="Foto do casal 1">
     <img src="foto2.jpeg" alt="Foto do casal 2">
     <img src="foto3.jpeg" alt="Foto do casal 3">
-    <!-- Adicione mais imagens -->
+    <!-- Adicione mais imagens se quiser -->
   </div>
 
   <div class="frase">"Amar é colecionar momentos ao seu lado, todos os dias."</div>
-
   <div class="data">Desde 18 de outubro de 2024</div>
 
+  <footer>
+    Feito com 💖 por Maria Eduarda & Victor – 2025
+  </footer>
+
   <script>
-    // CONTADOR
-    const inicio = new Date(2024, 9, 18); // Outubro = mês 9
+    // CONTADOR DE TEMPO
+    const inicio = new Date(2024, 9, 18); // Outubro = 9
     const contador = document.getElementById('contador');
 
     function atualizarTempo() {
@@ -147,8 +177,8 @@
       }
       if (meses < 0) { meses += 12; anos--; }
 
-      contador.innerHTML = ⏳<br>${anos} anos ${meses} meses ${dias} dias<br>
-        ${horas} horas ${minutos} minutos ${segundos} segundos;
+      contador.innerHTML = `⏳<br>${anos} anos ${meses} meses ${dias} dias<br>
+        ${horas} horas ${minutos} minutos ${segundos} segundos`;
     }
 
     setInterval(atualizarTempo, 1000);
@@ -166,7 +196,7 @@
 
     setInterval(criarCoracao, 300);
 
-    // EFEITO CENTRAL DA IMAGEM
+    // EFEITO DA IMAGEM CENTRAL
     const carousel = document.getElementById("carousel");
     const imgs = carousel.querySelectorAll("img");
 
@@ -185,7 +215,5 @@
     window.addEventListener("resize", atualizarImagemCentral);
   </script>
 
-</body>
-</html>
 </body>
 </html>
