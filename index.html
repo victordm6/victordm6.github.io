@@ -177,7 +177,7 @@
       }
       if (meses < 0) { meses += 12; anos--; }
 
-      contador.innerHTML = `⏳<br>${anos} anos ${meses} meses ${dias} dias<br>
+      contador.innerHTML = `<br>${anos} anos ${meses} meses ${dias} dias<br>
         ${horas} horas ${minutos} minutos ${segundos} segundos`;
     }
 
@@ -213,6 +213,36 @@
     carousel.addEventListener("scroll", atualizarImagemCentral);
     window.addEventListener("load", atualizarImagemCentral);
     window.addEventListener("resize", atualizarImagemCentral);
+
+    // Scroll automático do carrossel
+let direcao = 1;
+let scrollVelocidade = 1.2;
+let autoScrollInterval;
+
+function autoScroll() {
+  const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+  if (carousel.scrollLeft >= maxScroll || carousel.scrollLeft <= 0) {
+    direcao *= -1; // Inverter direção
+  }
+  carousel.scrollLeft += scrollVelocidade * direcao;
+  atualizarImagemCentral();
+}
+
+function iniciarAutoScroll() {
+  autoScrollInterval = setInterval(autoScroll, 20);
+}
+
+function pararAutoScroll() {
+  clearInterval(autoScrollInterval);
+}
+
+carousel.addEventListener("mouseenter", pararAutoScroll);
+carousel.addEventListener("mouseleave", iniciarAutoScroll);
+carousel.addEventListener("touchstart", pararAutoScroll);
+carousel.addEventListener("touchend", iniciarAutoScroll);
+
+iniciarAutoScroll();
+
   </script>
 
 </body>
