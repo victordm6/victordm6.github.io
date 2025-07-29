@@ -12,9 +12,7 @@
     }
 
     body {
-      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
-      background-size: 400% 400%;
-      animation: gradientMove 15s ease infinite;
+      background: #0d0c1d;
       color: white;
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
@@ -22,17 +20,10 @@
       position: relative;
     }
 
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     h1 {
       margin: 30px 0 10px;
       font-size: 2em;
-      color: #fff0f5;
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+      color: #ff82a9;
       font-family: 'Brush Script MT', cursive;
     }
 
@@ -40,7 +31,6 @@
       margin: 10px 0 30px;
       font-size: 1.1em;
       line-height: 1.8em;
-      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     }
 
     .carrossel {
@@ -61,7 +51,7 @@
 
     .carrossel img {
       height: 220px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease;
       border-radius: 15px;
       scroll-snap-align: center;
       box-shadow: 0 5px 15px rgba(0,0,0,0.5);
@@ -72,34 +62,19 @@
       transform: scale(1.2);
       opacity: 1;
       z-index: 1;
-      box-shadow: 0 0 20px #ff82a9, 0 0 40px #ff82a9;
     }
 
     .frase {
       margin-top: 30px;
       font-size: 1.2em;
-      color: #fff;
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+      color: #dcdcdc;
       font-style: italic;
-    }
-
-    .mensagem {
-      margin-top: 20px;
-      font-size: 1.3em;
-      color: #ffe4e1;
-      animation: fadeIn 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0.3; }
-      to { opacity: 1; }
     }
 
     .data {
       margin: 20px 0;
       font-size: 0.9em;
-      color: #f0f0f0;
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+      color: #bbb;
     }
 
     audio {
@@ -130,8 +105,6 @@
 
   <h1>Maria Eduarda ❤️ Victor</h1>
 
-  <!-- Música Spotify: Poema de Amor - Bom Gosto -->
-<div style="margin: 20px auto; max-width: 320px;">
   <iframe style="border-radius:12px"
   src="https://open.spotify.com/embed/track/19fQ0Zvr2gOx2ouehx8hkX?si=67d384285a204989?utm_source=generator&theme=0"
   width="100%" height="80" frameborder="0" allowfullscreen=""
@@ -139,7 +112,6 @@
   loading="lazy">
   </iframe>
 
-  
   <div id="contador">Carregando tempo de amor...</div>
 
   <div class="carrossel" id="carousel">
@@ -151,9 +123,12 @@
 
   <div class="frase">"Amar é colecionar momentos ao seu lado, todos os dias."</div>
 
-  <div class="mensagem">Você é o meu para sempre! 💕</div>
-
   <div class="data">Desde 18 de outubro de 2024</div>
+
+  <audio controls autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
 
   <script>
     // CONTADOR
@@ -179,20 +154,18 @@
       }
       if (meses < 0) { meses += 12; anos--; }
 
-      contador.innerHTML = `${anos} anos ${meses} meses ${dias} dias<br>
-        ${horas} horas ${minutos} minutos ${segundos} segundos`;
+      contador.innerHTML = ⏳<br>${anos} anos ${meses} meses ${dias} dias<br>
+        ${horas} horas ${minutos} minutos ${segundos} segundos;
     }
 
-    atualizarTempo();
     setInterval(atualizarTempo, 1000);
 
     // CORAÇÕES CAINDO
     function criarCoracao() {
       const heart = document.createElement("div");
       heart.classList.add("heart");
-      heart.innerHTML = ["💜", "❤️", "💖", "💘"][Math.floor(Math.random()*4)];
+      heart.innerHTML = "💜";
       heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (15 + Math.random() * 15) + "px";
       heart.style.animationDuration = 4 + Math.random() * 3 + "s";
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 7000);
@@ -217,16 +190,9 @@
     carousel.addEventListener("scroll", atualizarImagemCentral);
     window.addEventListener("load", atualizarImagemCentral);
     window.addEventListener("resize", atualizarImagemCentral);
-
-    // CARROSSEL AUTOMÁTICO
-    let scrollStep = 1;
-    setInterval(() => {
-      carousel.scrollLeft += scrollStep;
-      if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth || carousel.scrollLeft === 0) {
-        scrollStep *= -1;
-      }
-    }, 30);
   </script>
 
+</body>
+</html>
 </body>
 </html>
