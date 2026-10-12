@@ -1,6 +1,6 @@
 (globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push([document.currentScript,990001,e=>{
   const React=e.i(271645),DOM=e.r(88014),Viewer=e.i(413019).default,Provider=e.i(755287).I18nProvider;
-  Promise.all([fetch('/data/album.json?v=pagina27').then(r=>r.json()),fetch('/data/viewer-labels.json').then(r=>r.json())]).then(async ([album,messages])=>{
+  Promise.all([fetch('/data/album.json?v=uberlandia').then(r=>r.json()),fetch('/data/viewer-labels.json').then(r=>r.json())]).then(async ([album,messages])=>{
     const startPage=album.sources.find(source=>source.live?.kind==='timeTogether').live;
     const startedAt=new Date(startPage.date+'T'+(startPage.time||'12:00')+':00-03:00');
     const elapsedDays=Math.max(0,Math.floor((Date.now()-startedAt.getTime())/86400000));
