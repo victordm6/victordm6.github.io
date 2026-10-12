@@ -5,3 +5,5 @@ Implementação própria para GitHub Pages, publicada com autorização do solic
 As 30 páginas conservam sua aparência por imagens renderizadas do álbum autorizado. Navegação, cartas, roleta, memória, quebra-cabeça, raspadinha e outras interações foram recriadas em código próprio. As interações podem diferir do original. Fotos adicionadas, destinos, promessas e cadeado são salvos neste navegador. A música é reproduzida pelo YouTube; mapas abrem no OpenStreetMap.
 
 A página anterior permanece em site-anterior/.
+
+Livro em CSS 3D com planos, espessura, perspectiva, movimento de câmera e virada das páginas, implementado em código próprio.
