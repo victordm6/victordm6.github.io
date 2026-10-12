@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push([document.currentScript,592470,e=>{e.s(['installClientErrorReporter',0,()=>{},'reloadOnceForChunk',0,()=>false,'reportClientError',0,()=>false]);}]);
