@@ -1,4 +1,4 @@
-# Álbum Edu & Ana — visualizador original
+# Álbum Victor & Maria Eduarda — visualizador original
 
 Esta versão usa o visualizador original do álbum, incluindo o livro 3D, suas 30 páginas, fotos, animações e interações. A redistribuição da interface e do conteúdo do álbum foi expressamente autorizada pelo solicitante.
 
