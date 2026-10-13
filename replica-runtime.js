@@ -49,7 +49,7 @@
       return dataURL(init.body).then(value=>{uploads.set(url.pathname.split('/').at(-1),value);return new Response('',{status:200});});
     }
     if (/facebook|tiktok|google-analytics|googletagmanager|cloudflarestorage|pinterest/.test(url.hostname)) return localJSON({});
-    if (url.hostname === 'api.lovepanda.com.br' || url.pathname.startsWith('/api/')) {
+    if (url.hostname === 'api.album.local' || url.pathname.startsWith('/api/')) {
       if (url.pathname.includes('/starmap/chart')) return nativeFetch('/data/starmap.json');
       if (url.pathname.includes('/tracking/config')) return localJSON({enabled:false,facebook:{enabled:false},tiktok:{enabled:false}});
       if (url.pathname.includes('/auth/csrf-token')) return localJSON({csrfToken:'local-replica'});
@@ -57,8 +57,8 @@
       if (url.pathname.includes('/geo')) return localJSON({country:'BR',countryCode:'BR'});
       return localJSON({success:true});
     }
-    if (url.hostname === 'media.lovepanda.com.br') return nativeFetch('/assets/media.lovepanda.com.br'+url.pathname+url.search,init);
-    if (url.hostname === 'lovepanda.com.br' && !url.pathname.startsWith('/presente/')) return nativeFetch(url.pathname+url.search,init);
+    if (url.hostname === 'media.local') return nativeFetch('/assets/media.local'+url.pathname+url.search,init);
+    if (url.hostname === 'victordm6.github.io' && !url.pathname.startsWith('/presente/')) return nativeFetch(url.pathname+url.search,init);
     return nativeFetch(input,init);
   };
   const OriginalXHR = window.XMLHttpRequest;
@@ -66,7 +66,7 @@
     open(method,url,...options) {
       const parsed=new URL(url,location.href);
       this.__replicaURL=parsed;
-      this.__replicaLocal=parsed.hostname==='api.lovepanda.com.br'||parsed.pathname.startsWith('/api/')||/facebook|tiktok|pinterest|google-analytics/.test(parsed.hostname);
+      this.__replicaLocal=parsed.hostname==='api.album.local'||parsed.pathname.startsWith('/api/')||/facebook|tiktok|pinterest|google-analytics/.test(parsed.hostname);
       return super.open(method,this.__replicaLocal?'/data/starmap.json':url,...options);
     }
     send(body) {
