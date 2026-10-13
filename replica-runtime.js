@@ -3,8 +3,8 @@
   const nativeFetch = window.fetch.bind(window);
   const albumSlug = 'edu-ana-43e26386';
   const uploads = new Map();
-  const stateKey = 'album-replica-content:'+albumSlug;
-  const state = nativeFetch('/data/initial-live.json').then(r=>r.json()).then(initial=>{
+  const stateKey = 'album-replica-content:photos-64-v1:'+albumSlug;
+  const state = nativeFetch('/data/initial-live.json?v=photos64').then(r=>r.json()).then(initial=>{
     try {return JSON.parse(localStorage.getItem(stateKey)) || initial;} catch {return initial;}
   });
   const saveState = value => localStorage.setItem(stateKey,JSON.stringify(value));
