@@ -20,7 +20,7 @@
     milestones.unlockedCount=milestones.cards.length;
     const requests=new Set(Array.from(document.fonts,face=>`${face.style} 500 36px ${face.family}`));
     await Promise.all(Array.from(requests,font=>document.fonts.load(font,'Victor & Maria Eduarda 2026').catch(()=>{})));
-    function App(){const[open,setOpen]=React.useState(false);return React.createElement(Provider,{locale:'pt',messages,hostname:location.hostname},open?React.createElement(Viewer,{...album,visible:true}):React.createElement('main',{id:'intro'},React.createElement('img',{src:album.sources[0].src,alt:'O álbum de Victor e Maria Eduarda'}),React.createElement('p',{},'Para Maria Eduarda'),React.createElement('h1',{},'Victor guardou a história de vocês em um álbum.'),React.createElement('p',{},`30 páginas · 64 fotos · ${elapsedDays} dias de história`),React.createElement('button',{onClick:()=>setOpen(true)},'Abrir o álbum')));}
+    function App(){const[open,setOpen]=React.useState(false);return React.createElement(Provider,{locale:'pt',messages,hostname:location.hostname},open?React.createElement(Viewer,{...album,visible:true}):React.createElement('main',{id:'intro'},React.createElement('img',{src:album.sources[0].src,alt:'O álbum de Victor e Maria Eduarda'}),React.createElement('p',{},'Para Maria Eduarda'),React.createElement('button',{onClick:()=>setOpen(true)},'Abrir o álbum')));}
     DOM.createRoot(document.getElementById('album-root')).render(React.createElement(App));
   }).catch(error=>{document.getElementById('album-root').textContent='Não foi possível abrir o álbum.';console.error(error);});
 }]);
