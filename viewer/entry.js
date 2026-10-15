@@ -1,7 +1,7 @@
 (globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push([document.currentScript,439805,(e,module)=>{module.exports=function(value){return this.__data__.has(value)};}]);
 (globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push([document.currentScript,990001,e=>{
   const React=e.i(271645),DOM=e.r(88014),Viewer=e.i(413019).default,Provider=e.i(755287).I18nProvider;
-  Promise.all([fetch('/data/album.json?v=album-otimizado').then(r=>r.json()),fetch('/data/viewer-labels.json?v=viagens-fotos-novas').then(r=>r.json())]).then(async ([album,messages])=>{
+  Promise.all([fetch('/data/album.json?v=album-mais-leve').then(r=>r.json()),fetch('/data/viewer-labels.json?v=viagens-fotos-novas').then(r=>r.json())]).then(async ([album,messages])=>{
     const startPage=album.sources.find(source=>source.live?.kind==='timeTogether').live;
     const startedAt=new Date(startPage.date+'T'+(startPage.time||'00:00')+':00-03:00');
     const elapsedDays=Math.max(0,Math.floor((Date.now()-startedAt.getTime())/86400000));
@@ -19,7 +19,7 @@
     milestones.cards=milestones.cards.map(card=>{const Icon=achievementIcons.get(card.id);if(!Icon)throw new Error('Ícone de conquista ausente: '+card.id);return {...card,Icon};});
     milestones.unlockedCount=milestones.cards.length;
     const requests=new Set(Array.from(document.fonts,face=>`${face.style} 500 36px ${face.family}`));
-    await Promise.all(Array.from(requests,font=>document.fonts.load(font,'Victor & Maria Eduarda 2026').catch(()=>{})));
+    void Promise.all(Array.from(requests,font=>document.fonts.load(font,'Victor & Maria Eduarda 2026').catch(()=>{})));
     if(window.matchMedia('(max-width: 767px), (any-pointer: coarse)').matches){
       let momentPage=15;
       album.sources=album.sources.map(source=>source.live?.kind==='momentosADois'?{pageId:source.pageId,src:'/assets/mobile-momentos-'+(momentPage++)+'.jpg',pending:false}:source);
