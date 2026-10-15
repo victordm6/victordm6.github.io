@@ -1,7 +1,7 @@
 (globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push([document.currentScript,439805,(e,module)=>{module.exports=function(value){return this.__data__.has(value)};}]);
 (globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push([document.currentScript,990001,e=>{
   const React=e.i(271645),DOM=e.r(88014),Viewer=e.i(413019).default,Provider=e.i(755287).I18nProvider;
-  Promise.all([fetch('/data/album.json?v=legendas-encontros').then(r=>r.json()),fetch('/data/viewer-labels.json?v=rodape-sem-total').then(r=>r.json())]).then(async ([album,messages])=>{
+  Promise.all([fetch('/data/album.json?v=caixinha-foto-nova').then(r=>r.json()),fetch('/data/viewer-labels.json?v=rodape-sem-total').then(r=>r.json())]).then(async ([album,messages])=>{
     const startPage=album.sources.find(source=>source.live?.kind==='timeTogether').live;
     const startedAt=new Date(startPage.date+'T'+(startPage.time||'00:00')+':00-03:00');
     const elapsedDays=Math.max(0,Math.floor((Date.now()-startedAt.getTime())/86400000));
