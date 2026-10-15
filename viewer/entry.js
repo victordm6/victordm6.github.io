@@ -27,7 +27,9 @@
     if(window.matchMedia('(max-width: 767px), (any-pointer: coarse)').matches){
       album.sources=album.sources.map(source=>source.live?.kind==='baralho'?{pageId:source.pageId,src:'/assets/mobile-baralho.jpg',pending:false}:source);
     }
-    function App(){const[open,setOpen]=React.useState(false);return React.createElement(Provider,{locale:'pt',messages,hostname:location.hostname},open?React.createElement(Viewer,{...album,visible:true}):React.createElement('main',{id:'intro'},React.createElement('img',{src:album.sources[0].src,alt:'O álbum de Victor e Maria Eduarda'}),React.createElement('p',{},'Para Maria Eduarda'),React.createElement('button',{onClick:()=>setOpen(true)},'Abrir o álbum')));}
+    const mobile3d=window.matchMedia('(max-width: 767px), (any-pointer: coarse)').matches;
+    if(mobile3d){const turnPages=new Set([8,13,17,18,19,20,21,22,23,24,27,29,30]);album.sources=album.sources.map((source,index)=>turnPages.has(index)?{...source,src:'/assets/mobile-turn-'+index+'.webp'}:source);}
+    function App(){const[open,setOpen]=React.useState(false);return React.createElement(Provider,{locale:'pt',messages,hostname:location.hostname},open?React.createElement(Viewer,{...album,visible:true,lean:mobile3d,calmBake:mobile3d}):React.createElement('main',{id:'intro'},React.createElement('img',{src:album.sources[0].src,alt:'O álbum de Victor e Maria Eduarda'}),React.createElement('p',{},'Para Maria Eduarda'),React.createElement('button',{onClick:()=>setOpen(true)},'Abrir o álbum')));}
     DOM.createRoot(document.getElementById('album-root')).render(React.createElement(App));
   }).catch(error=>{document.getElementById('album-root').textContent='Não foi possível abrir o álbum.';console.error(error);});
 }]);
